@@ -12,9 +12,15 @@ public class WebController {
     @Autowired
     Producer producer;
 
-    @RequestMapping("/send")
-    public String sendMsg(@RequestParam("msg")String msg){
-        producer.produceMsg(msg);
-        return "Done";
+    @RequestMapping("/cats")
+    public String sendCat(){
+        producer.produceMsg("cats");
+        return "Voted for cats!";
+    }
+
+    @RequestMapping("/dogs")
+    public String sendDog(){
+        producer.produceMsg("dogs");
+        return "Voted for dogs!";
     }
 }
