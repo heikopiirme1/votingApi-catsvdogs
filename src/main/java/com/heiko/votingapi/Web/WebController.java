@@ -2,8 +2,8 @@ package com.heiko.votingapi.Web;
 
 import com.heiko.votingapi.Producer.Producer;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
 @RestController
@@ -12,15 +12,15 @@ public class WebController {
     @Autowired
     Producer producer;
 
+    @CrossOrigin(origins = "http://localhost:4200")
     @RequestMapping("/cats")
-    public String sendCat(){
+    public void sendCat(){
         producer.produceMsg("cats");
-        return "Voted for cats!";
     }
 
+    @CrossOrigin(origins = "http://localhost:4200")
     @RequestMapping("/dogs")
-    public String sendDog(){
+    public void sendDog(){
         producer.produceMsg("dogs");
-        return "Voted for dogs!";
     }
 }

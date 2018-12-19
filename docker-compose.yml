@@ -1,0 +1,37 @@
+version: '3'
+services:
+ 
+  rabbitmq:
+    container_name: rabbitmq
+    image: 'rabbitmq:management'
+    ports:
+      - "5672:5672"
+      - "15672:15672"
+
+  votingapi:
+    container_name: votingapi
+    image: 'votingapi:latest'
+    ports:
+      - "8080:8080"
+
+  votingfront:
+    container_name: votingfront
+    build: ../ng-catsvdogs
+    volumes:
+      - '../ng-catsvdogs:/usr/src/app'
+    ports:
+      - "4200:4200"
+
+  mysql-dev:
+    image: mysql:8.0.2
+    environment:
+      MYSQL_ROOT_PASSWORD: password
+      MYSQL_DATABASE: votingdb
+    ports:
+      - "3306:3306"
+
+  worker:
+    container_name: worker
+    image: 'worker:latest'
+    ports:
+      - "8081:8080"
