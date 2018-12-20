@@ -1,0 +1,4 @@
+-------------------------------------------------------------------------------
+Test set: com.heiko.votingapi.VotingapiApplicationTests
+-------------------------------------------------------------------------------
+Tests run: 1, Failures: 0, Errors: 0, Skipped: 0, Time elapsed: 14.805 s - in com.heiko.votingapi.VotingapiApplicationTests

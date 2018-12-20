@@ -10,7 +10,7 @@ services:
 
   votingapi:
     container_name: votingapi
-    image: 'votingapi:latest'
+    build: ./
     ports:
       - "8080:8080"
 
@@ -32,6 +32,6 @@ services:
 
   worker:
     container_name: worker
-    image: 'worker:latest'
+    build: ../worker-catsvdogs
     ports:
       - "8081:8080"
