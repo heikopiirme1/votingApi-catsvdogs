@@ -35,3 +35,11 @@ services:
     build: ../worker-catsvdogs
     ports:
       - "8081:8080"
+
+  resultsapi:
+    container_name: resultsapi
+    build: ../resultsApi-catsvdogs
+    volumes:
+      - '../resultsApi-catsvdogs:/usr/src/app'
+    ports:
+      - "3000:3000"
