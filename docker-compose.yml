@@ -7,6 +7,10 @@ services:
     ports:
       - "5672:5672"
       - "15672:15672"
+    volumes:
+    - ./data:/var/lib/rabbitmq:rw
+    - ./definitions.json:/opt/definitions.json:ro
+    - ./rabbitmq.config:/etc/rabbitmq/rabbitmq.config:ro
 
   votingapi:
     container_name: votingapi
