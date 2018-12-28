@@ -1,5 +1,3 @@
-DROP TABLE votes;
-
 CREATE TABLE votes (
     id INT NOT NULL AUTO_INCREMENT,
     vote_name VARCHAR(50) NOT NULL,
