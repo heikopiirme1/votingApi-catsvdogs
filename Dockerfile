@@ -1,9 +1,6 @@
-FROM java:8-jdk-alpine
-
-COPY ./target/votingapi-0.0.1-SNAPSHOT.jar /usr/app/
-
-WORKDIR /usr/app
-
-RUN sh -c 'touch votingapi-0.0.1-SNAPSHOT.jar'
-
-ENTRYPOINT ["java","-jar","votingapi-0.0.1-SNAPSHOT.jar"]
+FROM maven:3.5.3-alpine
+WORKDIR /usr/src
+COPY . .
+RUN mvn clean install && mv ./target/votingapi-0.0.1-SNAPSHOT.jar votingapi-0.0.1-SNAPSHOT.jar
+EXPOSE 8080
+ENTRYPOINT ["java", "-jar", "votingapi-0.0.1-SNAPSHOT.jar"]

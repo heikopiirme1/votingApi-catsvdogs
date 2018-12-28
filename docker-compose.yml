@@ -3,26 +3,26 @@ services:
  
   rabbitmq:
     container_name: rabbitmq
-    image: 'rabbitmq:management'
+    image: rabbitmq:management
     ports:
       - "5672:5672"
       - "15672:15672"
     volumes:
-    - ./data:/var/lib/rabbitmq:rw
+    - ./data:/var/lib/rabbitmq/mnesia:rw
     - ./definitions.json:/opt/definitions.json:ro
     - ./rabbitmq.config:/etc/rabbitmq/rabbitmq.config:ro
 
   votingapi:
     container_name: votingapi
     build: ./
+    depends_on:
+      - rabbitmq
     ports:
       - "8080:8080"
 
   votingfront:
     container_name: votingfront
     build: ../ng-catsvdogs
-    volumes:
-      - '../ng-catsvdogs:/usr/src/app'
     ports:
       - "4200:4200"
 
@@ -37,13 +37,15 @@ services:
   worker:
     container_name: worker
     build: ../worker-catsvdogs
+    depends_on:
+      - rabbitmq
     ports:
       - "8081:8080"
 
   resultsapi:
     container_name: resultsapi
     build: ../resultsApi-catsvdogs
-    volumes:
-      - '../resultsApi-catsvdogs:/usr/src/app'
+    depends_on:
+      - mysql-dev
     ports:
       - "3000:3000"
