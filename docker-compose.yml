@@ -26,6 +26,14 @@ services:
     ports:
       - "4200:4200"
 
+  flyway:
+    image: boxfuse/flyway:5.2.1
+    command: -url=jdbc:mysql://db -schemas=votingdb -user=root -password=password -connectRetries=60 repair migrate
+    volumes:
+      - ./flyway:/flyway/sql
+    depends_on:
+      - mysql-dev
+  
   mysql-dev:
     image: mysql:8.0.2
     environment:
@@ -47,5 +55,6 @@ services:
     build: ../resultsApi-catsvdogs
     depends_on:
       - mysql-dev
+      - flyway
     ports:
       - "3000:3000"
